@@ -8,7 +8,7 @@ namespace LinqLearn.Models
 
         public string Name { get; set; }
 
-        public ICollection<GameGenre> Genres { get; set; }
+        public ICollection<string> Genres { get; set; }
 
         public decimal Price { get; set; }
     }

@@ -6,11 +6,11 @@ namespace LinqLearn.Models
     {
         public string Name { get; set; }
 
-        public ICollection<GameGenre> Genres { get; set; }
+        public ICollection<string> Genres { get; set; }
 
-        public decimal? MinimalCost { get; set; }
+        public decimal? MinPrice { get; set; }
 
-        public decimal? MaximalCost { get; set; }
+        public decimal? MaxPrice { get; set; }
 
         public int Skip { get; set; }
 
