@@ -79,5 +79,84 @@ namespace LinqLearn.DAL
             var existingGame = Games.FirstOrDefault(g => g.Id == gameId);
             return Task.FromResult(existingGame);
         }
+
+        #region Seed
+
+        private const string Strategy = "Strategy";
+        private const string Action = "Action";
+        private const string RPG = "RPG";
+        private const string Simulator = "Simaltor";
+        private const string BaseBuilding = "BaseBuilding";
+        
+        public static void SeedInitialData()
+        {
+            var rand = new Random();
+            var id = 1;
+
+            Games.Add(new Game()
+            {
+                Id = id++, 
+                Name = "Factorio",
+                Genres = new List<string>()
+                {
+                    Strategy,
+                    BaseBuilding
+                },
+                Price = rand.Next(10,100),
+            });
+            Games.Add(new Game()
+            {
+                Id = id++,
+                Name = "Need for speed",
+                Genres = new List<string>()
+                {
+                    Simulator
+                },
+                Price = rand.Next(10,100),
+            });
+            Games.Add(new Game()
+            {
+                Id = id++,
+                Name = "Rome:TotalWar",
+                Genres = new List<string>()
+                {
+                    Strategy
+                },
+                Price = rand.Next(10, 100),
+            });
+            Games.Add(new Game()
+            {
+                Id = id++,
+                Name = "Doom",
+                Genres = new List<string>()
+                {
+                    Action
+                },
+                Price = rand.Next(10, 100),
+            });
+            Games.Add(new Game()
+            {
+                Id = id++,
+                Name = "Witcher 3: Wild hunt",
+                Genres = new List<string>()
+                {
+                    Action,
+                    RPG
+                },
+                Price = rand.Next(10, 100),
+            });
+            Games.Add(new Game()
+            {
+                Id = id++,
+                Name = "Satisfactory",
+                Genres = new List<string>()
+                {
+                    BaseBuilding
+                },
+                Price = rand.Next(10, 100),
+            });
+        }
+
+        #endregion
     }
 }

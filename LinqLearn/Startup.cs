@@ -51,6 +51,8 @@ namespace LinqLearn
             {
                 endpoints.MapControllers();
             });
+
+            InMemoryGamesRepository.SeedInitialData();
         }
     }
 }
