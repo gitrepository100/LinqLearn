@@ -23,11 +23,11 @@ namespace LinqLearn.Controllers
 
         [HttpPost]
         [Route("search")]
-        public async Task<IActionResult> SearchGames([FromBody] GameSearchSettings searchSettings)
+        public async Task<IActionResult> SearchGames([FromBody] GameSearchSettings searchSettings, int skip, int take)
         {
             var filterFunction = _filterProvider.GetFilterFunction(searchSettings);
 
-            var games = await _gameRepository.GetList(filterFunction, searchSettings.Skip, searchSettings.Take);
+            var games = await _gameRepository.GetList(filterFunction, skip, take);
 
             return Ok(games);
         }
