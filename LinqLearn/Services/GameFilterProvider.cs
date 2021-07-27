@@ -11,26 +11,31 @@ namespace LinqLearn.Services
         {
             //TODO: implement logic here;
 
-            Expression<Func<Game, bool>> filterExpression = game => game.Price >= searchSettingsCollection.MinPrice;
+            Expression<Func<Game, bool>> filterExpression = game => true;
 
-            Expression<Func<Game, bool>> newExpression = game => game.Price <= searchSettingsCollection.MaxPrice;
+            Expression<Func<Game, bool>> newExpression;
 
-            if (searchSettingsCollection.MaxPrice != 0)
+            if (searchSettingsCollection.MinPrice is not null)
             {
+                newExpression = game => game.Price >= searchSettingsCollection.MinPrice;
                 filterExpression = ExpressionCombiner.And(filterExpression, newExpression);
             }
 
-            newExpression = game => game.Name.StartsWith(searchSettingsCollection.Name);
-
-            if (searchSettingsCollection.Name != "string")
+            if (searchSettingsCollection.MaxPrice is not null)
             {
+                newExpression = game => game.Price <= searchSettingsCollection.MinPrice;
                 filterExpression = ExpressionCombiner.And(filterExpression, newExpression);
             }
 
-            newExpression = game => game.Genres.All(genre => searchSettingsCollection.Genres.Contains(genre));
-
-            if (searchSettingsCollection.Genres.ElementAt(0) != "string" )
+            if (searchSettingsCollection.Name is not null)
             {
+                newExpression = game => game.Name.StartsWith(searchSettingsCollection.Name);
+                filterExpression = ExpressionCombiner.And(filterExpression, newExpression);
+            }
+
+            if (searchSettingsCollection.Genres.Count > 0)
+            { 
+                newExpression = game => game.Genres.All(genre => searchSettingsCollection.Genres.Contains(genre));
                 filterExpression = ExpressionCombiner.And(filterExpression, newExpression);
             }
                        
